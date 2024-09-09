@@ -1,20 +1,24 @@
 const Logo = ({ ...props }) => (
   <svg
-    width="32"
-    height="32"
-    viewBox="0 0 32 32"
-    fill="none"
     xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 512.005 512.005"
+    className="h-8 fill-current inline"
     {...props}
   >
-    <rect width="100%" height="100%" rx="16" fill="white" />
+    <rect
+      fill="#2a2a31"
+      x="16.539"
+      y="425.626"
+      width="479.767"
+      height="50.502"
+      transform="matrix(1,0,0,1,0,0)"
+    />
     <path
-      fillRule="evenodd"
-      clipRule="evenodd"
-      d="M17.6482 10.1305L15.8785 7.02583L7.02979 22.5499H10.5278L17.6482 10.1305ZM19.8798 14.0457L18.11 17.1983L19.394 19.4511H16.8453L15.1056 22.5499H24.7272L19.8798 14.0457Z"
-      fill="black"
+      className="plane-take-off"
+      d=" M 510.7 189.151 C 505.271 168.95 484.565 156.956 464.365 162.385 L 330.156 198.367 L 155.924 35.878 L 107.19 49.008 L 211.729 230.183 L 86.232 263.767 L 36.614 224.754 L 0 234.603 L 45.957 314.27 L 65.274 347.727 L 105.802 336.869 L 240.011 300.886 L 349.726 271.469 L 483.935 235.486 C 504.134 230.057 516.129 209.352 510.7 189.151 Z "
     />
   </svg>
+
 );
 
 export default Logo;

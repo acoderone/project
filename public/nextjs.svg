@@ -31,7 +31,7 @@
      id="path8"
      style="fill:#ffffff;fill-opacity:1" />
   <path
-     fill-rule="evenodd"
+     fillRule="evenodd"
      clip-rule="evenodd"
      d="M 80.907,79.339 17.0151,0 H 0 V 79.3059 H 13.6121 V 16.9516 L 63.8067,79.339 Z"
      fill="black"

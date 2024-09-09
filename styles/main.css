@@ -28,7 +28,7 @@ body {
     'Helvetica', sans-serif;
   text-rendering: optimizeLegibility;
   -moz-osx-font-smoothing: grayscale;
-  @apply text-white bg-zinc-800 antialiased;
+  @apply leading-normal tracking-normal text-white gradient
 }
 
 body {
@@ -56,4 +56,17 @@ p a {
 
 .height-screen-helper {
   min-height: calc(100vh - 80px);
+}
+
+
+.gradient {
+  background: #db4073;
+}
+#header {
+  transition: bg-black bg-opacity-80 shadow-md;
+  ;
+}
+
+#header.scrolled {
+  @apply gradient shadow-md;
 }

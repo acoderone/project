@@ -29,54 +29,57 @@ export default function ForgotPassword({
   };
 
   return (
-    <div className="my-8">
-      <form
-        noValidate={true}
-        className="mb-4"
-        onSubmit={(e) => handleSubmit(e)}
-      >
-        <div className="grid gap-2">
-          <div className="grid gap-1">
-            <label htmlFor="email">Email</label>
-            <input
-              id="email"
-              placeholder="name@example.com"
-              type="email"
-              name="email"
-              autoCapitalize="none"
-              autoComplete="email"
-              autoCorrect="off"
-              className="w-full p-3 rounded-md bg-zinc-800"
-            />
-          </div>
-          <Button
-            variant="slim"
-            type="submit"
-            className="mt-1"
-            loading={isSubmitting}
-            disabled={disableButton}
-          >
-            Send Email
-          </Button>
-        </div>
-      </form>
-      <p>
-        <Link href="/signin/password_signin" className="font-light text-sm">
-          Sign in with email and password
-        </Link>
-      </p>
-      {allowEmail && (
-        <p>
-          <Link href="/signin/email_signin" className="font-light text-sm">
-            Sign in via magic link
+    <>
+      <div className="sm:mx-auto sm:w-full sm:max-w-md">
+        <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+          Receive a link to reset your password
+        </h2>
+        <p className="mt-2 text-center text-sm text-gray-600 max-w">
+          Or
+          <Link href="/signin/signup" className="font-medium text-pink-600 hover:text-pink-500">
+            create an account
           </Link>
         </p>
-      )}
-      <p>
-        <Link href="/signin/signup" className="font-light text-sm">
-          Don't have an account? Sign up
-        </Link>
-      </p>
-    </div>
+
+      </div>
+      <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+        <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+          <form className="space-y-6" noValidate={true}
+            onSubmit={(e) => handleSubmit(e)}
+          >
+            <div>
+              <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+                Email address
+              </label>
+              <div className="mt-1">
+                <input
+                  id="email"
+                  type="email"
+                  name="email"
+                  autoCapitalize="none"
+                  autoComplete="email"
+                  autoCorrect="off"
+                  className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-pink-500 focus:border-pink-500 focus:z-10 sm:text-sm"
+                  placeholder="Enter your email address" />
+              </div>
+            </div>
+            <div>
+              <Button type="submit"
+                className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-pink-600 hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500"
+                loading={isSubmitting}
+                disabled={disableButton}
+              >
+
+                Send Email
+              </Button>
+            </div>
+            <p className="text-sm font-light text-gray-500 dark:text-gray-400">Already have an account? <Link
+              className="font-medium text-pink-600 hover:underline " href="/signin/password_signin">Sign in here</Link>
+            </p>
+          </form>
+        </div>
+      </div>
+    </>
+
   );
 }

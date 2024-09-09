@@ -88,7 +88,6 @@ export async function signInWithEmail(formData: FormData) {
 
 export async function requestPasswordUpdate(formData: FormData) {
   const callbackURL = getURL('/auth/reset_password');
-
   // Get form data
   const email = String(formData.get('email')).trim();
   let redirectPath: string;

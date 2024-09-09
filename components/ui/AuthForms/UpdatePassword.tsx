@@ -23,43 +23,51 @@ export default function UpdatePassword({
   };
 
   return (
-    <div className="my-8">
-      <form
-        noValidate={true}
-        className="mb-4"
-        onSubmit={(e) => handleSubmit(e)}
-      >
-        <div className="grid gap-2">
-          <div className="grid gap-1">
-            <label htmlFor="password">New Password</label>
-            <input
-              id="password"
-              placeholder="Password"
-              type="password"
-              name="password"
-              autoComplete="current-password"
-              className="w-full p-3 rounded-md bg-zinc-800"
-            />
-            <label htmlFor="passwordConfirm">Confirm New Password</label>
-            <input
-              id="passwordConfirm"
-              placeholder="Password"
-              type="password"
-              name="passwordConfirm"
-              autoComplete="current-password"
-              className="w-full p-3 rounded-md bg-zinc-800"
-            />
+    <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+      <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+
+        <form className="space-y-6" noValidate={true}
+          onSubmit={(e) => handleSubmit(e)}>
+
+          <div>
+            <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+              Password
+            </label>
+            <div className="mt-1">
+              <input id="password" name="password" type="password" required
+                className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-pink-500 focus:border-pink-500 focus:z-10 sm:text-sm"
+                placeholder="Enter your password"
+                autoComplete="current-password"
+              />
+            </div>
           </div>
-          <Button
-            variant="slim"
-            type="submit"
-            className="mt-1"
-            loading={isSubmitting}
-          >
-            Update Password
-          </Button>
-        </div>
-      </form>
-    </div>
+
+          <div>
+            <label htmlFor="passwordConfirm" className="block text-sm font-medium text-gray-700">
+              Password Confirm
+            </label>
+            <div className="mt-1">
+              <input
+                className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-pink-500 focus:border-pink-500 focus:z-10 sm:text-sm"
+                id="passwordConfirm"
+                placeholder="Password"
+                type="password"
+                name="passwordConfirm"
+                autoComplete="current-password"
+              />
+            </div>
+          </div>
+
+          <div>
+            <Button type="submit"
+              loading={isSubmitting}
+              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-pink-600 hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500">
+
+              Update Password
+            </Button>
+          </div>
+        </form>
+      </div>
+    </div >
   );
 }
