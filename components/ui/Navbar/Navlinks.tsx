@@ -136,7 +136,23 @@ export default function Navlinks({ user }: { user: User | null }) {
                         href="/signin/update_password"
                         className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                       >
-                        Settings
+                        Login & security
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        href="/scheduleEmail"
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      >
+                        Schedule Email
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        href="/#pricing"
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      >
+                        Upgrade
                       </Link>
                     </li>
                     <li>
