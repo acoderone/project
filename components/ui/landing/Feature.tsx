@@ -6,7 +6,6 @@ import Email from '@/components/icons/Email';
 import Schedule from '@/components/icons/Schedule';
 import Statistic from '@/components/icons/Statistic';
 import Link from 'next/link';
-import { useTestStore } from '@/store/testStore';
 
 const Feature = () => {
 

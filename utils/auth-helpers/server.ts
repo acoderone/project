@@ -167,6 +167,7 @@ export async function signUp(formData: FormData) {
 
   const email = String(formData.get('email')).trim();
   const password = String(formData.get('password')).trim();
+  const fullName = String(formData.get('fullName')).trim();
   let redirectPath: string;
 
   if (!isValidEmail(email)) {
@@ -182,6 +183,9 @@ export async function signUp(formData: FormData) {
     email,
     password,
     options: {
+      data: {
+        full_name: fullName
+      },
       emailRedirectTo: callbackURL
     }
   });
@@ -330,6 +334,60 @@ export async function updateName(formData: FormData) {
       '/account',
       'Hmm... Something went wrong.',
       'Your name could not be updated.'
+    );
+  }
+}
+
+export async function updateProfile(formData: FormData) {
+  // Get form data
+  console.log("formData", formData)
+  const newEmail = String(formData.get('email')).trim();
+  const newFullName = String(formData.get('fullName')).trim();
+  const oldEmail = String(formData.get('oldEmail')).trim();
+  const oldFullName = String(formData.get('oldFullName')).trim();
+  console.log("oldFullname", oldFullName, "oldEmi", oldEmail)
+  // Check that the email is valid
+  if (!isValidEmail(newEmail)) {
+    return getErrorRedirect(
+      '/account',
+      'Your email could not be updated.',
+      'Invalid email address.'
+    );
+  }
+
+  const supabase = createClient();
+
+  const callbackUrl = getURL(
+    getStatusRedirect('/account', 'Success!', `Your account has been updated.`)
+  );
+
+  const { error } = await supabase.auth.updateUser(
+    { email: newEmail,
+      data: { full_name: newFullName }
+    },
+    {
+      emailRedirectTo: callbackUrl
+    }
+  );
+
+  if (error) {
+    return getErrorRedirect(
+      '/account',
+      'Your account could not be updated.',
+      error.message
+    );
+  } else {
+    if (oldEmail !== newEmail) {
+      return getStatusRedirect(
+        '/account',
+        'Confirmation emails sent.',
+        `You will need to confirm the update by clicking the links sent to both the old and new email addresses.`
+      );
+    }
+    return getStatusRedirect(
+      '/account',
+      'Success!',
+      'Your account has been updated.'
     );
   }
 }
