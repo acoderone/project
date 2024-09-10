@@ -10,9 +10,10 @@ import { usePathname, useRouter } from 'next/navigation';
 import { getRedirectMethod } from '@/utils/auth-helpers/settings';
 import s from './Navbar.module.css';
 import Button from '../Button';
+import Avatar from '@/components/icons/Avatar';
 
 export default function Navlinks({ user }: { user: User | null }) {
-  const [isDropdownVisible, setDropdownVisible] = useState(false);
+  const [isMenuDropdownVisible, setMenuDropdownVisible] = useState(false);
   const [isUserDropdownOpen, setIsUserDropdownOpen] = useState(false);
   const userDropdownRef = useRef<HTMLDivElement>(null);
   const router = getRedirectMethod() === 'client' ? useRouter() : null;
@@ -46,7 +47,7 @@ export default function Navlinks({ user }: { user: User | null }) {
         !navMenuDiv.contains(target) &&
         !navMenu.contains(target)
       ) {
-        setDropdownVisible(false);
+        setMenuDropdownVisible(false);
       }
     };
 
@@ -71,39 +72,94 @@ export default function Navlinks({ user }: { user: User | null }) {
   }, []);
 
   const toggleDropdown = () => {
-    setDropdownVisible((prev) => !prev);
+    setMenuDropdownVisible((prev) => !prev);
   };
 
   return (
-    <nav id="header" className="fixed w-full z-30 top-0 text-white gradient">
-      <div className="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 py-2">
+    <nav id="header" className="fixed w-full z-30 top-0 text-white gradient transition-all duration-300 ease-in-out">
+      <div className="w-full container flex flex-wrap items-center justify-between mx-auto mt-0 py-2">
+        {/* Logo */}
         <div className="pl-4 flex items-center">
           <Link
-            className="toggleColour text-white no-underline hover:no-underline font-bold text-2xl lg:text-4xl"
+            className="toggleColor text-white no-underline hover:no-underline font-bold text-2xl lg:text-4xl"
             href=""
           >
             <Logo />
             RateUpdate
           </Link>
         </div>
-        <div className="block lg:hidden pr-4">
+
+        <div className='flex items-center lg:order-2 space-x-3 lg:space-x-0 rtl:space-x-reverse'>
+          {/* Avatar Dropdown list */}
+          {
+            user && (
+              <>
+                {/* Avatar */}
+                <div className='relative'>
+                  <button type="button"
+                    className="flex text-sm rounded-full border-2 border-white p-2 lg:me-0 focus:ring-2 focus:ring-gray-300"
+                    id="user-menu-button" aria-expanded={isUserDropdownOpen}
+                    onClick={() => setIsUserDropdownOpen(!isUserDropdownOpen)}
+                  >
+                    <span className="sr-only">Open user menu</span>
+                    <Avatar />
+                  </button>
+                  {/* Avatar Dropdown list */}
+                  <div
+                    ref={userDropdownRef}
+                    className={`z-50 ${isUserDropdownOpen && !!user ? 'block' : 'hidden'} absolute right-0 top-10 mt-2 w-48 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600`}
+                  >
+                    <div className="px-4 py-3">
+                      <span className="block text-sm text-gray-900">{user.user_metadata.full_name ?? ""}</span>
+                      <span className="block text-sm  text-gray-500 truncate">{user.email ?? ""}</span>
+                    </div>
+                    <ul className="py-2" aria-labelledby="user-menu-button">
+                      <li>
+                        <Link href="/account"
+                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Profile</Link>
+                      </li>
+                      <li>
+                        <Link href="/signin/update_password"
+                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Settings</Link>
+                      </li>
+                      <li>
+                        <form onSubmit={(e) => handleRequest(e, SignOut, router)}>
+                          <input type="hidden" name="pathName" value={usePathname()} />
+                          <button type="submit" className="block px-4 py-2 w-full text-left text-sm text-gray-700 hover:bg-gray-100">
+                            Sign out
+                          </button>
+                        </form>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </>
+            )
+          }
+
+          {/* Toggle Menu PopUp Button */}
           <button
             id="nav-toggle"
-            // onClick={toggleDropdown}
-            className="flex items-center p-1 text-white focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out"
+            onClick={toggleDropdown}
+            className="toggleColor inline-flex items-center p-1 text-white justify-center rounded-lg lg:hidden"
           >
             <Menu />
           </button>
         </div>
+
+
+        {/* Nav Content */}
         <div
-          className={`w-full flex-grow lg:flex lg:items-center lg:w-auto ${isDropdownVisible ? "" : "hidden"
-            } mt-2 lg:mt-0 bg-white lg:bg-transparent text-white p-4 lg:p-0 z-20`}
+          className={`items-center justify-between w-full lg:flex lg:w-auto lg:order-1 ${isMenuDropdownVisible ? "" : "hidden"} mt-2 lg:mt-0 lg:bg-transparent text-white p-4 lg:p-0 z-20 transition-all duration-300 ease-in-out bg-white`}
           id="nav-content"
         >
-          <ul className="list-reset lg:flex justify-end flex-1 items-center">
+          {/* Menu Links */}
+          <ul
+            className="flex flex-col lg:flex-row"
+          >
             <li className="mr-3">
               <Link
-                className="inline-block text-white no-underline hover:text-underline py-2 px-4"
+                className="toggleColor inline-block text-primary lg:text-white text-lg font-bold no-underline hover:text-underline py-2 px-4"
                 href="/#features"
               >
                 Features
@@ -111,7 +167,7 @@ export default function Navlinks({ user }: { user: User | null }) {
             </li>
             <li className="mr-3">
               <Link
-                className="inline-block text-white no-underline hover:text-underline py-2 px-4"
+                className="toggleColor inline-block text-primary lg:text-white text-lg font-bold no-underline hover:text-underline py-2 px-4"
                 href="/#pricing"
               >
                 Pricing
@@ -119,65 +175,29 @@ export default function Navlinks({ user }: { user: User | null }) {
             </li>
             <li className="mr-3">
               <Link
-                className="inline-block text-white no-underline hover:text-underline py-2 px-4"
+                className="toggleColor inline-block text-primary lg:text-white text-lg font-bold no-underline hover:text-underline py-2 px-4"
                 href="/#contact"
               >
                 Contact us
               </Link>
             </li>
           </ul>
-          {user ? (
-            <>
-              <div className="flex items-center md:order-2 space-x-3 relative md:space-x-0">
-                <button type="button"
-                  className="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
-                  id="user-menu-button" aria-expanded={isUserDropdownOpen}
-                  onClick={() => setIsUserDropdownOpen(!isUserDropdownOpen)}
-                >
-                  <span className="sr-only">Open user menu</span>
-                  <div className="w-8 h-8 rounded-full bg-white">CCI</div>
-                  {/* <Image className="w-8 h-8 rounded-full" src={false} alt="user photo" /> */}
-                </button>
-                <div
-                  ref={userDropdownRef}
-                  className={`z-50 ${isUserDropdownOpen && !!user ? 'block' : 'hidden'} absolute right-0 top-8 mt-2 w-48 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600`}
-                >
-                  <div className="px-4 py-3">
-                    <span className="block text-sm text-gray-900">{user.user_metadata.full_name ?? ""}</span>
-                    <span className="block text-sm  text-gray-500 truncate">{user.email ?? ""}</span>
-                  </div>
-                  <ul className="py-2" aria-labelledby="user-menu-button">
-                    <li>
-                      <Link href="/account"
-                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Profile</Link>
-                    </li>
-                    <li>
-                      <Link href="/signin/update_password"
-                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Settings</Link>
-                    </li>
-                    <li>
-                      <form onSubmit={(e) => handleRequest(e, SignOut, router)}>
-                        <input type="hidden" name="pathName" value={usePathname()} />
-                        <button type="submit" className="block px-4 py-2 w-full text-left text-sm text-gray-700 hover:bg-gray-100">
-                          Sign out
-                        </button>
-                      </form>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </>
-          ) : (
-            <Link
-              href="/signin"
-              id="navAction"
-              className="mx-auto lg:mx-0 hover:underline bg-white text-gray-800 font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
-              Get Started
-            </Link>
+          {!user && (
+            <div className="flex lg:ml-4">
+              <Link
+                href="/signin"
+                id="navAction"
+                className="hover:underline bg-primary text-white lg:bg-white lg:text-gray-800 font-bold rounded-full my-2 py-3 px-8 shadow-lg transform transition hover:scale-105 duration-300 ease-in-out">
+                Get Started
+              </Link>
+            </div>
+
           )}
         </div>
+
+
       </div>
       <hr className="border-b border-gray-100 opacity-25 my-0 py-0" />
-    </nav>
+    </nav >
   );
 }

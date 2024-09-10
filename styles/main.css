@@ -62,11 +62,29 @@ p a {
 .gradient {
   background: #db4073;
 }
+
 #header {
-  transition: bg-black bg-opacity-80 shadow-md;
-  ;
+  height: 80px; /* Initial height */
 }
 
 #header.scrolled {
-  @apply gradient shadow-md;
+  height: 80px; /* Reduced height when scrolled */
+  background-color: white; /* Change background color when scrolled */
+}
+
+#header .container {
+  height: 100%;
+}
+
+.scrolled .toggleColor {
+  color: #db4073;
+}
+
+.scrolled #navAction {
+  background-color: #db4073;
+  color: white;
+}
+
+.scrolled #user-menu-button {
+  @apply border-primary;
 }
