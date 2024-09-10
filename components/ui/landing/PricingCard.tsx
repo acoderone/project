@@ -6,12 +6,18 @@ type PricingPlanProps = {
     plan: {
         name: string;
         description: string;
-        price: number;
+        price: {
+            monthly: number;
+            yearly: number;
+        };
         features: string[];
     };
+    selectedDuration: 'monthly' | 'yearly';
 };
 
-const PricingCard: React.FC<PricingPlanProps> = ({ plan }) => {
+const PricingCard: React.FC<PricingPlanProps> = ({ plan, selectedDuration }) => {
+
+
     return (
         <div
             key={plan.name}
@@ -26,16 +32,17 @@ const PricingCard: React.FC<PricingPlanProps> = ({ plan }) => {
                 </p>
                 <p className="mt-8">
                     <span className="text-4xl font-bold text-slate-900 tracking-tighter">
-                        ${plan.price}
+                        ${plan.price[selectedDuration]}
                     </span>
-                    <span className="text-base font-medium text-slate-500">/mo</span>
+                    <span className="text-base font-medium text-slate-500">/{selectedDuration === 'monthly' ? 'month' : 'year'}</span>
                 </p>
                 <Link
                     href="/sign-up"
-                    className="mt-8 block w-full bg-pink-600 rounded-md py-2 text-sm font-semibold text-white text-center"
+                    className="mt-8 block w-full bg-primary rounded-md py-2 text-sm font-semibold text-white text-center border border-primary hover:bg-white hover:text-primary"
                 >
                     Join as {plan.name}
                 </Link>
+
             </div>
             <div className="pt-6 pb-8 px-6">
                 <h3 className="text-sm font-bold text-slate-900 tracking-wide uppercase">

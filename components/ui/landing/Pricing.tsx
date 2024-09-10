@@ -1,30 +1,46 @@
-import React from 'react';
+'use client';
+
+import React, { useState } from 'react';
 import PricingCard from './PricingCard';
 
 type PricingPlan = {
   name: string;
   description: string;
-  price: number;
+  price: {
+    monthly: number;
+    yearly: number;
+  };
   features: string[];
 };
+
+type BillingDuration = 'monthly' | 'yearly';
 
 const pricingPlans: PricingPlan[] = [
   {
     name: 'Starter',
     description: 'For new makers who want to fine-tune and test an idea.',
-    price: 0,
+    price: {
+      monthly: 0,
+      yearly: 0
+    },
     features: ['Sent Dashboard']
   },
   {
     name: 'Pro',
     description: 'For professionals who need advanced features and support.',
-    price: 29,
+    price: {
+      monthly: 10,
+      yearly: 100
+    },
     features: ['Sent Dashboard', 'Advanced Analytics', 'Priority Support']
   },
   {
     name: 'Enterprise',
     description: 'For large teams and organizations with custom requirements.',
-    price: 99,
+    price: {
+      monthly: 30,
+      yearly: 300
+    },
     features: [
       'Sent Dashboard',
       'Advanced Analytics',
@@ -36,6 +52,7 @@ const pricingPlans: PricingPlan[] = [
 ];
 
 const Pricing = () => {
+  const [selectedDuration, setSelectedDuration] = useState<BillingDuration>('monthly');
   return (
     <section className="bg-gray-100 py-8" id="pricing">
       <h2 className="w-full my-2 text-4xl font-bold leading-tight text-center text-gray-800">
@@ -48,20 +65,22 @@ const Pricing = () => {
         <div className="relative self-center bg-slate-200 rounded-lg p-0.5 flex">
           <button
             type="button"
-            className="relative w-1/2 rounded-md py-2 text-sm font-medium whitespace-nowrap focus:outline-none sm:w-auto sm:px-8 gradient text-white shadow-sm"
+            className={`relative w-1/2 rounded-md py-2 text-sm font-medium whitespace-nowrap focus:outline-none sm:w-auto sm:px-8 ${selectedDuration === 'monthly' ? 'bg-primary text-white shadow-sm' : 'text-slate-900'}`}
+            onClick={() => setSelectedDuration('monthly')}
           >
             Monthly billing
           </button>
           <button
             type="button"
-            className="ml-0.5 relative w-1/2 border rounded-md py-2 text-sm font-medium whitespace-nowrap focus:outline-none sm:w-auto sm:px-8 border-transparent text-slate-900"
+            className={`relative w-1/2 rounded-md py-2 text-sm font-medium whitespace-nowrap focus:outline-none sm:w-auto sm:px-8 ${selectedDuration === 'yearly' ? 'bg-primary text-white shadow-sm' : 'text-slate-900'}`}
+            onClick={() => setSelectedDuration('yearly')}
           >
             Yearly billing
           </button>
         </div>
         <div className="mt-12 space-y-3 sm:mt-16 sm:space-y-0 sm:grid sm:grid-cols-3 sm:gap-6 md:max-w-5xl md:mx-auto xl:grid-cols-3">
           {pricingPlans.map((plan) => (
-            <PricingCard key={plan.name} plan={plan} />
+            <PricingCard key={plan.name} plan={plan} selectedDuration={selectedDuration} />
           ))}
         </div>
       </div>

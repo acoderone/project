@@ -1,10 +1,8 @@
 'use client';
 
 import Button from '@/components/ui/Button';
-import Link from 'next/link';
 import { signInWithPassword } from '@/utils/auth-helpers/server';
 import { handleRequest, signInWithOAuth } from '@/utils/auth-helpers/client';
-import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 
 /* eslint-disable @typescript-eslint/no-unused-vars */
@@ -30,7 +28,6 @@ export default function ScheduleEmailForm() {
         await signInWithOAuth(e);
         setIsSubmitting(false);
     };
-
 
     return (
         <>
