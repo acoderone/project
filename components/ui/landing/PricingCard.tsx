@@ -1,6 +1,5 @@
 import React from 'react';
 import Check from '@/components/icons/Check';
-import Button from '../Button';
 import Link from 'next/link';
 
 type PricingPlanProps = {

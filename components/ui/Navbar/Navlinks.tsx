@@ -8,8 +8,6 @@ import { SignOut } from '@/utils/auth-helpers/server';
 import { handleRequest } from '@/utils/auth-helpers/client';
 import { usePathname, useRouter } from 'next/navigation';
 import { getRedirectMethod } from '@/utils/auth-helpers/settings';
-import s from './Navbar.module.css';
-import Button from '../Button';
 import Avatar from '@/components/icons/Avatar';
 
 export default function Navlinks({ user }: { user: User | null }) {

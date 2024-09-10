@@ -1,4 +1,4 @@
-const Menu = ({ ...props }) => {
+const Menu = () => {
   return (
     <svg
       className="fill-current h-6 w-6"

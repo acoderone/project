@@ -2,6 +2,7 @@ import React, { InputHTMLAttributes, ChangeEvent } from 'react';
 import cn from 'classnames';
 
 import s from './Input.module.css';
+/* eslint-disable @typescript-eslint/no-unused-vars */
 
 interface Props extends Omit<InputHTMLAttributes<any>, 'onChange'> {
   className?: string;

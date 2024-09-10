@@ -5,8 +5,11 @@ import { signUp } from '@/utils/auth-helpers/server';
 import { handleRequest } from '@/utils/auth-helpers/client';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import Button from '../Button';
 
 // Define prop type with allowEmail boolean
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
 interface SignUpProps {
   allowEmail: boolean;
   redirectMethod: string;
@@ -147,13 +150,13 @@ export default function SignUp({ allowEmail, redirectMethod }: SignUpProps) {
             </div>
 
             <div>
-              <button
+              <Button
                 type="submit"
                 className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-pink-600 hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500"
                 loading={isSubmitting}
               >
                 Sign up
-              </button>
+              </Button>
             </div>
 
             <p className="text-sm font-light text-gray-500 dark:text-gray-400">

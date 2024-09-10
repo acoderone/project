@@ -1,4 +1,3 @@
-import Logo from '@/components/icons/Logo';
 import { createClient } from '@/utils/supabase/server';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
@@ -8,11 +7,8 @@ import {
   getDefaultSignInView,
   getRedirectMethod
 } from '@/utils/auth-helpers/settings';
-import Card from '@/components/ui/Card';
 import PasswordSignIn from '@/components/ui/AuthForms/PasswordSignIn';
 import EmailSignIn from '@/components/ui/AuthForms/EmailSignIn';
-import Separator from '@/components/ui/AuthForms/Separator';
-import OauthSignIn from '@/components/ui/AuthForms/OauthSignIn';
 import ForgotPassword from '@/components/ui/AuthForms/ForgotPassword';
 import UpdatePassword from '@/components/ui/AuthForms/UpdatePassword';
 import SignUp from '@/components/ui/AuthForms/Signup';
@@ -24,7 +20,7 @@ export default async function SignIn({
   params: { id: string };
   searchParams: { disable_button: boolean };
 }) {
-  const { allowOauth, allowEmail, allowPassword } = getAuthTypes();
+  const { allowEmail, allowPassword } = getAuthTypes();
   const viewTypes = getViewTypes();
   const redirectMethod = getRedirectMethod();
 

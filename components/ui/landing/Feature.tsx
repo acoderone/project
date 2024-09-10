@@ -1,7 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
 import featureImage from '@/public/feature.webp';
-import Button from '../Button';
 import Email from '@/components/icons/Email';
 import Schedule from '@/components/icons/Schedule';
 import Statistic from '@/components/icons/Statistic';

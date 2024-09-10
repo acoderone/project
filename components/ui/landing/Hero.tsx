@@ -1,7 +1,6 @@
-import React, { InputHTMLAttributes, ChangeEvent } from 'react';
+import React from 'react';
 import Image from 'next/image';
 import heroImage from '@/public/hero.png';
-import Button from '../Button';
 import Link from 'next/link';
 
 const Hero = () => {

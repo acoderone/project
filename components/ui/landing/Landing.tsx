@@ -1,4 +1,4 @@
-import React, { InputHTMLAttributes, ChangeEvent } from 'react';
+import React from 'react';
 import Hero from './Hero';
 import Feature from './Feature';
 import Pricing from './Pricing';

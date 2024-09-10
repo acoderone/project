@@ -8,6 +8,7 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 // Define prop type with allowEmail boolean
+/* eslint-disable @typescript-eslint/no-unused-vars */
 interface ForgotPasswordProps {
   allowEmail: boolean;
   redirectMethod: string;

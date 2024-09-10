@@ -1,5 +1,4 @@
 import React from 'react';
-import Check from '@/components/icons/Check';
 import PricingCard from './PricingCard';
 
 type PricingPlan = {

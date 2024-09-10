@@ -1,14 +1,8 @@
 'use client';
-import CustomerPortalForm from '@/components/ui/AccountForms/CustomerPortalForm';
-import EmailForm from '@/components/ui/AccountForms/EmailForm';
-import NameForm from '@/components/ui/AccountForms/NameForm';
-import { redirect } from 'next/navigation';
-import { createClient } from '@/utils/supabase/server';
-import { getUserDetails, getUser } from '@/utils/supabase/queries';
 import { handleRequest } from '@/utils/auth-helpers/client';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { updateEmail, updateProfile } from '@/utils/auth-helpers/server';
+import { updateProfile } from '@/utils/auth-helpers/server';
 import { User } from '@supabase/supabase-js';
 import Button from '../Button';
 

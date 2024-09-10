@@ -7,6 +7,7 @@ import { handleRequest, signInWithOAuth } from '@/utils/auth-helpers/client';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 
+/* eslint-disable @typescript-eslint/no-unused-vars */
 // Define prop type with allowEmail boolean
 interface PasswordSignInProps {
   allowEmail: boolean;
