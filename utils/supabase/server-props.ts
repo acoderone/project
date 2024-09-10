@@ -1,5 +1,5 @@
-import { type GetServerSidePropsContext } from 'next'
-import { createServerClient } from '@supabase/ssr'
+import { type GetServerSidePropsContext } from 'next';
+import { createServerClient } from '@supabase/ssr';
 
 export function createClient({ req, res }: GetServerSidePropsContext) {
   const supabase = createServerClient(
@@ -18,9 +18,9 @@ export function createClient({ req, res }: GetServerSidePropsContext) {
         //     )
         //   )
         // },
-      },
+      }
     }
-  )
+  );
 
-  return supabase
+  return supabase;
 }

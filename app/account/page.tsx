@@ -1,15 +1,11 @@
 import { redirect } from 'next/navigation';
 import { createClient } from '@/utils/supabase/server';
-import {
-  getUser
-} from '@/utils/supabase/queries';
+import { getUser } from '@/utils/supabase/queries';
 import Profile from '@/components/ui/AccountForms/Profile';
 
 export default async function Account() {
   const supabase = createClient();
-  const [user] = await Promise.all([
-    getUser(supabase),
-  ]);
+  const [user] = await Promise.all([getUser(supabase)]);
 
   if (!user) {
     return redirect('/signin');

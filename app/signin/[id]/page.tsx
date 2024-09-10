@@ -55,9 +55,7 @@ export default async function SignIn({
   }
 
   return (
-
     <div className="min-h-screen bg-gray-100 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
-
       {viewProp === 'password_signin' && (
         <PasswordSignIn
           allowEmail={allowEmail}

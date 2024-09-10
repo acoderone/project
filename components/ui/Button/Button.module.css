@@ -1,9 +1,9 @@
 .root {
-  @apply   cursor-pointer inline-flex leading-6  transition ease-in-out duration-150 font-semibold text-center justify-center border border-transparent items-center;
+  @apply cursor-pointer inline-flex leading-6  transition ease-in-out duration-150 font-semibold text-center justify-center border border-transparent items-center;
 }
 
 .root:hover {
-  @apply  border border-white;
+  @apply border border-white;
 }
 
 .root:focus {

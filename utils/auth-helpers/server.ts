@@ -339,12 +339,12 @@ export async function updateName(formData: FormData) {
 
 export async function updateProfile(formData: FormData) {
   // Get form data
-  console.log("formData", formData)
+  console.log('formData', formData);
   const newEmail = String(formData.get('email')).trim();
   const newFullName = String(formData.get('fullName')).trim();
   const oldEmail = String(formData.get('oldEmail')).trim();
   const oldFullName = String(formData.get('oldFullName')).trim();
-  console.log("oldFullname", oldFullName, "oldEmi", oldEmail)
+  console.log('oldFullname', oldFullName, 'oldEmi', oldEmail);
   // Check that the email is valid
   if (!isValidEmail(newEmail)) {
     return getErrorRedirect(
@@ -361,9 +361,7 @@ export async function updateProfile(formData: FormData) {
   );
 
   const { error } = await supabase.auth.updateUser(
-    { email: newEmail,
-      data: { full_name: newFullName }
-    },
+    { email: newEmail, data: { full_name: newFullName } },
     {
       emailRedirectTo: callbackUrl
     }
