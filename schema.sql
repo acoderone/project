@@ -137,6 +137,29 @@ create table subscriptions (
 alter table subscriptions enable row level security;
 create policy "Can only view own subs data." on subscriptions for select using (auth.uid() = user_id);
 
+-- Create the contacts table to store contact information
+CREATE TABLE IF NOT EXISTS contacts (
+  -- Unique identifier for each contact (UUID version 4)
+  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  
+  -- Name of the contact (cannot be NULL)
+  name TEXT NOT NULL,
+  
+  -- Email address of the contact (must be unique and cannot be NULL)
+  email TEXT NOT NULL UNIQUE,
+  
+  -- Phone number of the contact (cannot be NULL)
+  phone_number TEXT NOT NULL,
+  
+  -- Company the contact is associated with (optional)
+  company TEXT,
+  
+  -- State or region where the contact is located (optional)
+  state_name TEXT,
+  
+  -- Timestamp indicating when the contact was added (automatically set)
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
 /**
  * REALTIME SUBSCRIPTIONS
  * Only allow realtime listening on public tables.
